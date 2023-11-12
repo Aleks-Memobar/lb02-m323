@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quotes</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>Quotes</h1>
+        <table>
+            <thead>
+                <tr>
+                    <th>Autor</th>
+                    <th>Zitat</th>
+                    <th>Edit</th>
+                    <th>Delete</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for quote in quotes %}
+                    <tr>
+                        <td>{{ quote['author'] }}</td>
+                        <td>{{ quote['text'] }}</td>
+                        <td>
+                            <a href="{{ url_for('edit_quote', quote_id=quote['id']) }}" class="btn-icon btn-primary">
+                                <img src="{{ url_for('static', filename='edit_icon.png') }}" alt="Edit">
+                            </a>
+                        </td>
+                        <td>
+                            <a href="{{ url_for('delete_quote', quote_id=quote['id']) }}" class="btn-icon btn-danger">
+                                <img src="{{ url_for('static', filename='delete_icon.png') }}" alt="Delete">
+                            </a>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        <a href="{{ url_for('add_quote') }}" class="btn btn-primary right">Add Quote</a>
+    </div>
+</body>
+</html>
